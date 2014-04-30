@@ -35,16 +35,20 @@ public class War
    {
       deck = new Deck();
       deck.shuffle();
-      System.out.println(deck.cardsRemaining());
       player1Deck = new Pile();
       player2Deck = new Pile();
       warPile = new Pile();
+      
       //split the deck for player one and two. 
       for(int i = 0; i <26 ; i++)
       {
          player1Deck.add(deck.dealCard());
          player2Deck.add(deck.dealCard());
+         
       }
+      
+      player1Cards = player1Deck.size();
+      player2Cards = player2Deck.size();
       
     }
     
@@ -61,9 +65,9 @@ public class War
     {
       
       String boutcome = "";      // string name of who won battle
-      Card player1;         //the top card of player 1's pile
-      Card player2;         //the top card of player 2's pile
-      int outcome;          // the outcome of the battle 
+      Card player1;              //the top card of player 1's pile
+      Card player2;              //the top card of player 2's pile
+      int outcome;               // the outcome of the battle 
       
       player1 = player1Deck.topCard();          //draw top card from player 1's deck for battle 
       player2 = player2Deck.topCard();          //draw top card from player 2's deck for battle
@@ -215,14 +219,34 @@ public class War
          // if player one and player two have the same amount of cards in their decks when the end game flag is activated they tie.
          else if(player1Cards == player2Cards)
             win = "Tied";
+         
+         
        }
        
        return win;         // return the string value of whoever won
      }
      
      /**
-     The getPlayer1Cards method returns the int value for the number of
+     The getPlayer1Cards method returns the int value for the number of cards in Player 1's deck.
+     @return num the number of cards in player 1's deck. 
      */ 
+     public int getPlayer1Cards()
+     {
+        int num = player1Cards;
+        return num;
+      
+     }
+     
+     /**
+     The getPlayer2Cards method returns the int value for the number of cards in Player 2's deck.
+     @return num the number of cards in player 2's deck. 
+     */ 
+     public int getPlayer2Cards()
+     {
+        int num = player2Cards;
+        return num;
+      
+     }
        
             
             
