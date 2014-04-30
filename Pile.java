@@ -16,7 +16,7 @@ public class Pile extends ArrayList
     
    public Pile()
    {
-      pile = new ArrayList<Cards>();
+      pile = new ArrayList<Card>();
       
    }
    

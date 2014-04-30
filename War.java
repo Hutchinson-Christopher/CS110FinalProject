@@ -17,8 +17,8 @@ public class War
 {
    final int SPLITDECK = 26; // a constant for the number of cards in a half a deck 
    private Deck deck;        //the deck of cards for the game war
-   private Deck player1;   // player ones deck 
-   private Deck player2;   // computer player's deck 
+   private Pile player1;   // player ones deck 
+   private Pile player2;   // computer player's deck 
    private int player1Cards; // number of cards player one has
    private int player2Cards; // number of cards player two has 
    
