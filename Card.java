@@ -1,10 +1,13 @@
-/**
- * Representation of a single playing card (from a standard 52 card deck). 
- * A card consists of a suit value and a rank value.  Once instantiated, the
- * Card object cannot change.
- *
- * @Jackie Horton
- */
+/** 
+* Chris Hutchinson
+* CS 110
+* Prof. Horton 
+* Card - Representation of a single playing card from a standard 52 card deck. 
+* A card consists of a suit value and a rank value.  Once instantiated, the
+* Card object cannot change.
+*/
+
+
 
 public class Card 
 {     
@@ -14,23 +17,23 @@ public class Card
                             HEARTS = 1,
                             DIAMONDS = 2,
                             CLUBS = 3;
-    // ranks
-    // Cards 2 through 9 have face value
+    // Constants
+    // ranks, cards 2 through 9 have face value
     public final static int ACE = 1,          
                             JACK = 11,        
                             QUEEN = 12,       
                             KING = 13;
                             
-    // instance variables
-    private int suit;   // The suit of this card, one of the constants
-                              // SPADES, HEARTS, DIAMONDS, CLUBS.
+    
+    private int suit;         // The suit of this card, one of the constants SPADES, HEARTS, DIAMONDS, CLUBS.
                               
-    private int rank;  // The rank of this card, from 1 to 13.
+    private int rank;         // The rank of this card, from 1 to 13.
                              
    /**
-   * Creates a new playing card.
-   * @param suit the suit value of this card.
-   * @param rank the rank rank of this card.
+   This constructor accepts two arguments both ints. The first sets the rank of the card, and the second sets the 
+   suit of the card.
+   @param suit the suit value of this card.
+   @param rank the rank rank of this card.
    */
     public Card(int rank, int suit) 
     {
@@ -39,8 +42,9 @@ public class Card
     }
     
    /**
-   * Creates a new playing card as exact copy of otherCard
-   * @param otherCar the card to be copied
+   This constructor accepts one argument of the type card, and creates a copy of the parameter card by setting the
+   the field rank of the new card to the same as the parameter card and the same for the field suit. 
+   @param otherCar the card to be copied.
    */
     public Card(Card otherCard) 
     {
@@ -49,17 +53,18 @@ public class Card
     }
     
    /**
-   * Returns the suit of the card.
-   * @return a Suit constant representing the suit value of the card.
+   The getSuit method returns the suit of the card.
+   @return a Suit constant representing the suit value of the card.
    */
   
     public int getSuit() 
     {
       return suit;
     }
+    
    /**
-   * Returns the rank of the card.
-   * @return a Rank constant representing the rank value of the card.
+   The getRank method returns the rank of the card. 
+   @return a Rank constant representing the rank value of the card.
    */
 
     public int getRank() 
@@ -69,9 +74,10 @@ public class Card
     }
     
    /**
-   * Returns a description of the suit of this card.
-   * @return the suit value of the card as a string.
+   The getSuitAsString method returns the name of the suit of the card as a string. 
+   @return the suit value of the card as a string.
    */
+   
     public String getSuitAsString() 
     {
             // Return a String representing the card's suit.
@@ -85,9 +91,10 @@ public class Card
         }
     }
    /**
-   * Returns a description of the rank of this card.
-   * @return the rank value of the card as a string.
+   The getRankAsString method returns the name of the rank of the card as a string. 
+   @return the rank value of the card as a string.
    */
+   
    public String getRankAsString() 
    {
         switch ( rank ) {
@@ -108,8 +115,8 @@ public class Card
         }
     }
    /**
-   * Returns a description of this card.
-   * @return the name of the card.
+   The toString method returns a description of the card so the name of the rank and suit of the card as a string.
+   @return the name of the card.
    */
 
     public String toString() 
@@ -118,17 +125,49 @@ public class Card
     }
     
    /**
-   * Compares two cards to determine if they have the same value.
-   * @param card the other card
-   * @return true if the two cards have the same rank and suitvalues,
-   * falseotherwise.
+   The equals method returns the boolean value indicating true if the cards that are being compared have the same
+   rank and suit. If the cards being compared do not have the same rank and suit then the method returns a boolean
+   value of false. 
+   @param othercard the other card
+   @return true if the two cards have the same rank and suitvalues, false otherwise.
    */
+   
    public boolean equals(Card otherCard ) 
    {
       if ( ( rank != otherCard.rank ) || ( suit != otherCard.suit ) )
          return false;
       else
          return true;
+   }
+   
+   /**
+    The compareTo method Compares two cards to determine if they have the same rank.
+   * @param c the other card.
+   * @return outcome is the int that is returned. 1 if the card that calls the method is larger,
+   * -1 if the parameter card is larger and 0 if the cards are equal in rank. 
+   */
+   
+   public int compareTo(Card c)
+   {
+      int outcome = 2;   //varaible for return int value 
+      
+      if(this.rank > c.rank)
+         outcome = 1;
+      else if(this.rank < c.rank)
+         outcome = -1;
+      else if(this.rank == c.rank)
+         outcome = 0; 
+         
+      return outcome; 
+    }
+    
+    public static void main(String [] args) 
+   {
+      Card c1 = new Card(3,1);
+      Card c2 = new Card(2,2);
+      System.out.println(c1.compareTo(c2));
+      
+   
    }
 
 }
