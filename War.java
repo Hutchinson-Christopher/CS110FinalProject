@@ -22,7 +22,8 @@ public class War
    private Pile warPile;             // pile of cards that are to be won during a war from past battles. 
    private int player1Cards;         // number of cards player one has
    private int player2Cards;         // number of cards player two has
-   private boolean endGame = false;  //a boolean value flag that ends the game if set to true 
+   private boolean endGame = false;  //a boolean value flag that ends the game if set to true
+   
    
    
    
@@ -34,9 +35,12 @@ public class War
    {
       deck = new Deck();
       deck.shuffle();
-      
+      System.out.println(deck.cardsRemaining());
+      player1Deck = new Pile();
+      player2Deck = new Pile();
+      warPile = new Pile();
       //split the deck for player one and two. 
-      for(int i = 0; i < SPLITDECK; i++)
+      for(int i = 0; i <26 ; i++)
       {
          player1Deck.add(deck.dealCard());
          player2Deck.add(deck.dealCard());
@@ -53,8 +57,10 @@ public class War
     equivalent in rank. 
     */ 
     
-    public int battle()
+    public String[] battle()
     {
+      
+      String boutcome = "";      // string name of who won battle
       Card player1;         //the top card of player 1's pile
       Card player2;         //the top card of player 2's pile
       int outcome;          // the outcome of the battle 
@@ -70,6 +76,7 @@ public class War
          //add both cards used in battle to player 1's deck
          player1Deck.add(player1);
          player1Deck.add(player2);
+         boutcome = "User";
       }
       
       // if statement for player 2 win 
@@ -78,6 +85,7 @@ public class War
          //add both cards used in battle to player 2's deck
          player2Deck.add(player2);
          player2Deck.add(player1);
+         boutcome = "Computer";
       }
       
       // if statement for if the two cards have the same rank and its a tie. 
@@ -87,6 +95,7 @@ public class War
          warPile = new Pile();
          warPile.add(player1);
          warPile.add(player2);
+         boutcome = "Tie";
          goToWar();
          
        }
@@ -97,7 +106,9 @@ public class War
       
       winner();   //call the winner method to see if a player has lost the game at the end of the battle.
       
-      return outcome;   // return the int value outcome of the battle.
+      String[] info = {player1.getSuitAsString(), player1.getRankAsString(),player2.getSuitAsString(), player2.getRankAsString(),boutcome}; 
+      
+      return info;   // return the int value outcome of the battle.
       
     }
     
@@ -208,6 +219,10 @@ public class War
        
        return win;         // return the string value of whoever won
      }
+     
+     /**
+     The getPlayer1Cards method returns the int value for the number of
+     */ 
        
             
             
