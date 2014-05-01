@@ -133,6 +133,7 @@ public class War
     */
     
     public String[] goToWar()
+                        throws RanOutOfCards
     {
       Card prize1;          //the top card on player1's deck that is played face down 
       Card prize2;          //the top card on player2's deck that is played face down
@@ -152,6 +153,12 @@ public class War
          player1 = player1Deck.topCard();         //draw top card from player 1's deck for battle 
          player2 = player2Deck.topCard();         //draw top card from player 2's deck for battle
          
+         
+         if(player1Deck.size()== 0 || player2Deck.size()==0)
+            throw new RanOutOfCards();
+            
+            
+            
          outcome = player1.compareTo(player2);     //Compare the two cards to see if player 1 wins, player 2 wins , or Tie.
          System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
          System.out.println("Before War: " + warPile.size());
@@ -209,9 +216,9 @@ public class War
          
          return info;   // return the int value outcome of the battle.
        }
-       catch(Exception e)
+       catch(RanOutOfCards e)
        {
-         System.out.println("A player ran out of cards the game is over");
+         System.out.println(e.getMessage());
          win = winner();
          String[] failed = {"back.jpg","back.jpg","Player ran out of cards",win} ;
          return failed;
