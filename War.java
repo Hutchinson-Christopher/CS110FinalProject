@@ -65,6 +65,7 @@ public class War
     {
       
       String boutcome = "";      // string name of who won battle
+      String win= " ";           //string holds value of which player won the game if ended
       Card player1;              //the top card of player 1's pile
       Card player2;              //the top card of player 2's pile
       int outcome;               // the outcome of the battle 
@@ -80,7 +81,7 @@ public class War
          //add both cards used in battle to player 1's deck
          player1Deck.add(player1);
          player1Deck.add(player2);
-         boutcome = "User";
+         boutcome = "User Wins Battle";
       }
       
       // if statement for player 2 win 
@@ -89,7 +90,7 @@ public class War
          //add both cards used in battle to player 2's deck
          player2Deck.add(player2);
          player2Deck.add(player1);
-         boutcome = "Computer";
+         boutcome = "Computer Wins Battle";
       }
       
       // if statement for if the two cards have the same rank and its a tie. 
@@ -99,8 +100,8 @@ public class War
          warPile = new Pile();
          warPile.add(player1);
          warPile.add(player2);
-         boutcome = "Tie";
-         goToWar();
+         boutcome = "Tie: Go to War";
+         //goToWar();
          
        }
       
@@ -108,9 +109,9 @@ public class War
       player1Cards = player1Deck.size();         // set the field player1Cards to the number of cards that are in player1's deck
       player2Cards = player2Deck.size();         // set the field player2Cards to the number of cards that are in player2's deck
       
-      winner();   //call the winner method to see if a player has lost the game at the end of the battle.
+      win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
       
-      String[] info = {player1.getSuitAsString(), player1.getRankAsString(),player2.getSuitAsString(), player2.getRankAsString(),boutcome}; 
+      String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win}; 
       
       return info;   // return the int value outcome of the battle.
       
@@ -127,13 +128,17 @@ public class War
     equivalent in rank.
     */
     
-    public int goToWar()
+    public String[] goToWar()
     {
-      Card prize1;     //the top card on player1's deck that is played face down 
-      Card prize2;     //the top card on player2's deck that is played face down
+      Card prize1;          //the top card on player1's deck that is played face down 
+      Card prize2;          //the top card on player2's deck that is played face down
       Card player1;         //the top card of player 1's pile
       Card player2;         //the top card of player 2's pile
       int outcome;          // the outcome of the battle 
+      String boutcome = "";      // string for winner status
+      String win= " ";           //string holds value of which player won the game if ended 
+      
+      
       
       prize1 = player1Deck.topCard();          //draw top card from player 1's deck for prize 
       prize2 = player2Deck.topCard();          //draw top card from player 2's deck for prize
@@ -154,6 +159,7 @@ public class War
          //add both cards used in battle to player 1's deck
          player1Deck.add(player1);
          player1Deck.add(player2);
+         boutcome = "User Wins Battle"; 
       }
       
       // if statement for player 2 win 
@@ -166,6 +172,7 @@ public class War
          //add both cards used in battle to player 2's deck
          player2Deck.add(player2);
          player2Deck.add(player1);
+         boutcome = "Computer Wins Battle";
       }
       
       // if statement for if the two cards have the same rank and its a tie. 
@@ -174,6 +181,7 @@ public class War
          // call go to war method and pass the two cards used in the battle as arguments.
          warPile.add(player1);
          warPile.add(player2);
+         boutcome = "Tie: Go to War";
          goToWar();
       }
       
@@ -181,9 +189,11 @@ public class War
       player1Cards = player1Deck.size();         // set the field player1Cards to the number of cards that are in player1's deck
       player2Cards = player2Deck.size();         // set the field player2Cards to the number of cards that are in player2's deck
       
-      winner();   //call the winner method to see if a player has lost the game at the end of the battle.
+      win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
       
-      return outcome;   // return the int value outcome of the battle.
+      String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win}; 
+      
+      return info;   // return the int value outcome of the battle.
       
     }
     
@@ -195,30 +205,46 @@ public class War
     
     public String winner() 
     {
-      String win = " " ;       // set variable for string name of winner of war 
+      String win = "not done" ;       // set variable for string name of winner of war 
       
       // if statement that checks to see if either player is out of cards or the endGame flag has been set to true 
       if((player1Cards == 0 || player2Cards == 0) || endGame == true)
       {
          // if player one is out of cards computer wins 
          if(player1Cards == 0)
-            win = "Computer";
+         {
+            win = "Computer Wins";
+            
+         }
+            
          
          // if player two is out of cards the user wins 
          else if(player2Cards == 0)
-            win = "You";
+         {
+            win = "User Wins";
+            
+         }
          
          // if player one has more cards then player two when end game flag is hit user wins
          else if(player1Cards > player2Cards)
-            win = "You";
+         {
+            win = "User Wins";
+            
+         }
          
          // if player two has more cards then player one when end game flag is hit computer wins
          else if(player1Cards < player2Cards)
-            win = "Computer";
+         {
+            win = "Computer Wins";
+            
+         }
          
          // if player one and player two have the same amount of cards in their decks when the end game flag is activated they tie.
          else if(player1Cards == player2Cards)
+         {
             win = "Tied";
+            
+         }
          
          
        }

@@ -90,6 +90,26 @@ public class Card
            default:       return "Invalid";
         }
     }
+    
+    /**
+   The getSuitAsStringI method returns the first letter of the suit of the card as a string lowercase. 
+   @return the first letter of the suit value of the card as a string.
+   */
+   
+    public String getSuitAsStringI() 
+    {
+            // Return a String representing the card's suit.
+            // (If the card's suit is invalid, "??" is returned.)
+        switch ( suit ) {
+           case SPADES:   return "s";
+           case HEARTS:   return "h";
+           case DIAMONDS: return "d";
+           case CLUBS:    return "c";
+           default:       return "Invalid";
+        }
+    }
+    
+    
    /**
    The getRankAsString method returns the name of the rank of the card as a string. 
    @return the rank value of the card as a string.
@@ -114,6 +134,33 @@ public class Card
            default:  return "??";
         }
     }
+    
+   /**
+   The getRankAsStringI method returns the name of the rank of the card as a string lowercase. 
+   @return the rank value of the card as a string.
+   */
+   
+   public String getRankAsStringI() 
+   {
+        switch ( rank ) {
+           case 1:   return "ace";
+           case 2:   return "2";
+           case 3:   return "3";
+           case 4:   return "4";
+           case 5:   return "5";
+           case 6:   return "6";
+           case 7:   return "7";
+           case 8:   return "8";
+           case 9:   return "9";
+           case 10:  return "10";
+           case 11:  return "jack";
+           case 12:  return "queen";
+           case 13:  return "king";
+           default:  return "??";
+        }
+    }
+    
+    
    /**
    The toString method returns a description of the card so the name of the rank and suit of the card as a string.
    @return the name of the card.
@@ -160,6 +207,24 @@ public class Card
          
       return outcome; 
     }
+    
+    /**
+    The getCardImage method is a methos that returns a string that referes to the image of the playing card.
+    @return card the image name of that specific card. 
+    */
+    
+    public String getCardImage()
+    {
+      String card;
+      String pic = ".jpg";
+      String rank = getRankAsStringI();
+      String suit = getSuitAsStringI();
+      
+      card = rank+suit+pic;
+      
+      return card;
+      
+     }
     
  
 
