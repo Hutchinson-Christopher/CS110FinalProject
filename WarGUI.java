@@ -80,18 +80,19 @@ public class WarGUI extends JFrame
          computerScore.setText("Computer's Card Count: " + game.getPlayer2Cards());
          battleOutcome.setText(cardInfo[2]);
          
-         if(cardInfo[2].equals("Tie: Go to War"))
+         while(cardInfo[2].equals("Tie: Go to War"))
          {
             cardInfo = game.goToWar();
             userScore.setText("User's Card Count: " + game.getPlayer1Cards());
             computerScore.setText("Computer's Card Count: " + game.getPlayer2Cards());
             battleOutcome.setText(cardInfo[2]);
          }
-         System.out.println(cardInfo[3]);
+         
          if(!(cardInfo[3].equals("not done")))
          {
             battleButton.setEnabled(false);
             battleOutcome.setText(cardInfo[3]);
+            gameStatus.setText("Game Over");
           }
             
             

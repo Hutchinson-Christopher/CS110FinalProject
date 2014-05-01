@@ -22,6 +22,7 @@ public class War
    private Pile warPile;             // pile of cards that are to be won during a war from past battles. 
    private int player1Cards;         // number of cards player one has
    private int player2Cards;         // number of cards player two has
+   private int warPileCards;         // number of cards player two has
    private boolean endGame = false;  //a boolean value flag that ends the game if set to true
    
    
@@ -49,6 +50,7 @@ public class War
       
       player1Cards = player1Deck.size();
       player2Cards = player2Deck.size();
+      warPileCards = warPile.size();
       
     }
     
@@ -101,13 +103,15 @@ public class War
          warPile.add(player1);
          warPile.add(player2);
          boutcome = "Tie: Go to War";
-         //goToWar();
+         
          
        }
       
       
       player1Cards = player1Deck.size();         // set the field player1Cards to the number of cards that are in player1's deck
       player2Cards = player2Deck.size();         // set the field player2Cards to the number of cards that are in player2's deck
+      warPileCards = warPile.size();             // set the field warPileCards to the number of cards that are in the warPile deck
+      System.out.println("Battle Total Deck: " + (player1Deck.size()+player2Deck.size()));
       
       win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
       
@@ -134,67 +138,86 @@ public class War
       Card prize2;          //the top card on player2's deck that is played face down
       Card player1;         //the top card of player 1's pile
       Card player2;         //the top card of player 2's pile
-      int outcome;          // the outcome of the battle 
+      int outcome = 2;          // the outcome of the battle 
       String boutcome = "";      // string for winner status
       String win= " ";           //string holds value of which player won the game if ended 
       
       
-      
-      prize1 = player1Deck.topCard();          //draw top card from player 1's deck for prize 
-      prize2 = player2Deck.topCard();          //draw top card from player 2's deck for prize
-      warPile.add(prize1);                     //add the prize card for player 1 to the war pile 
-      warPile.add(prize2);                     //add the prize card for player 2 to the war pile
-      player1 = player1Deck.topCard();         //draw top card from player 1's deck for battle 
-      player2 = player2Deck.topCard();         //draw top card from player 2's deck for battle
-      
-      outcome = player1.compareTo(player2);     //Compare the two cards to see if player 1 wins, player 2 wins , or Tie.
-      
-      // if statement for player 1 win 
-      if(outcome == 1)
+      try
       {
-         // add the cards from the war pile to player1's deck
-         for(int index = 0; index < warPile.size();index++)
-            player1Deck.add(warPile.topCard());
+         prize1 = player1Deck.topCard();          //draw top card from player 1's deck for prize 
+         prize2 = player2Deck.topCard();          //draw top card from player 2's deck for prize
+         warPile.add(prize1);                     //add the prize card for player 1 to the war pile 
+         warPile.add(prize2);                     //add the prize card for player 2 to the war pile
+         player1 = player1Deck.topCard();         //draw top card from player 1's deck for battle 
+         player2 = player2Deck.topCard();         //draw top card from player 2's deck for battle
+         
+         outcome = player1.compareTo(player2);     //Compare the two cards to see if player 1 wins, player 2 wins , or Tie.
+         System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
+         System.out.println("Before War: " + warPile.size());
+       
+       
+         // if statement for player 1 win 
+         if(outcome == 1)
+         {
+            // add the cards from the war pile to player1's deck
+            while(!(warPile.isEmpty()))
+               player1Deck.add(warPile.topCard());
+               
+            //add both cards used in battle to player 1's deck
+            player1Deck.add(player1);
+            player1Deck.add(player2);
+            boutcome = "User Wins Battle";
+            System.out.println("User After War: " + warPile.size());
+            System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size())); 
+         }
+         
+         // if statement for player 2 win 
+         else if(outcome == -1)
+         {
+             // add the cards from the war pile to player1's deck
+            while(!(warPile.isEmpty()))
+               player2Deck.add(warPile.topCard());
+               
+            //add both cards used in battle to player 2's deck
+            player2Deck.add(player2);
+            player2Deck.add(player1);
+            boutcome = "Computer Wins Battle";
+            System.out.println("Computer After War: " + warPile.size());
+            System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
+         }
+         
+         // if statement for if the two cards have the same rank and its a tie. 
+         else if(outcome == 0)
+         {
+            // call go to war method and pass the two cards used in the battle as arguments.
+            warPile.add(player1);
+            warPile.add(player2);
+            boutcome = "Tie: Go to War";
+            System.out.println("Tied War: " + warPile.size());
+            System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
             
-         //add both cards used in battle to player 1's deck
-         player1Deck.add(player1);
-         player1Deck.add(player2);
-         boutcome = "User Wins Battle"; 
-      }
-      
-      // if statement for player 2 win 
-      else if(outcome == -1)
-      {
-          // add the cards from the war pile to player1's deck
-         for(int index = 0; index < warPile.size();index++)
-            player2Deck.add(warPile.topCard());
-            
-         //add both cards used in battle to player 2's deck
-         player2Deck.add(player2);
-         player2Deck.add(player1);
-         boutcome = "Computer Wins Battle";
-      }
-      
-      // if statement for if the two cards have the same rank and its a tie. 
-      else if(outcome == 0)
-      {
-         // call go to war method and pass the two cards used in the battle as arguments.
-         warPile.add(player1);
-         warPile.add(player2);
-         boutcome = "Tie: Go to War";
-         goToWar();
-      }
-      
-      
-      player1Cards = player1Deck.size();         // set the field player1Cards to the number of cards that are in player1's deck
-      player2Cards = player2Deck.size();         // set the field player2Cards to the number of cards that are in player2's deck
-      
-      win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
-      
-      String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win}; 
-      
-      return info;   // return the int value outcome of the battle.
-      
+         }
+        
+         
+         player1Cards = player1Deck.size();         // set the field player1Cards to the number of cards that are in player1's deck
+         player2Cards = player2Deck.size();         // set the field player2Cards to the number of cards that are in player2's deck
+         
+         win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
+         
+         String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win}; 
+         
+         return info;   // return the int value outcome of the battle.
+       }
+       catch(Exception e)
+       {
+         System.out.println("A player ran out of cards the game is over");
+         win = winner();
+         String[] failed = {"back.jpg","back.jpg","Player ran out of cards",win} ;
+         return failed;
+       }
+       
+       
     }
     
     /**
@@ -268,6 +291,17 @@ public class War
      @return num the number of cards in player 2's deck. 
      */ 
      public int getPlayer2Cards()
+     {
+        int num = player2Cards;
+        return num;
+      
+     }
+     
+     /**
+     The getWarPileCards method returns the int value for the number of cards in the War Pile deck.
+     @return num the number of cards in the war pile deck. 
+     */ 
+     public int getWarPileCards()
      {
         int num = player2Cards;
         return num;

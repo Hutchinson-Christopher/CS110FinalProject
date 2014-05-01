@@ -66,6 +66,22 @@ public class Pile extends ArrayList
       pile.clear();
    }
    
+   /**
+   The is empty method is a method that returns a boolean value of true if the pile is empty and false otherwise.
+   @return empty is the boolean value if a pile is empty. 
+   */
+   
+   public boolean isEmpty()
+   {
+      boolean empty = false; 
+      
+      if(pile.size()==0)
+         empty = true; 
+         
+      return empty; 
+      
+    }
+   
    
     
     
