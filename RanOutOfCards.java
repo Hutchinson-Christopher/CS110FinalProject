@@ -1,5 +1,5 @@
 /** 
-* Chris Hutchinson
+* Chris H. Hutchinson
 * CS 110
 * Prof. Horton 
 * RanOutOfCards exception are thrown when a player runs out of cards in his deck during a war.
