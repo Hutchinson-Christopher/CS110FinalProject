@@ -92,14 +92,14 @@ public class Card
     }
     
     /**
-   The getSuitAsStringI method returns the first letter of the suit of the card as a string lowercase. 
+   The getSuitAsStringI method returns the first letter of the suit of the card as a string lowercase for creating card image file name. 
    @return the first letter of the suit value of the card as a string.
    */
    
     public String getSuitAsStringI() 
     {
             // Return a String representing the card's suit.
-            // (If the card's suit is invalid, "??" is returned.)
+            // (If the card's suit is invalid, "Invalid" is returned.)
         switch ( suit ) {
            case SPADES:   return "s";
            case HEARTS:   return "h";
@@ -136,7 +136,8 @@ public class Card
     }
     
    /**
-   The getRankAsStringI method returns the name of the rank of the card as a string lowercase. 
+   The getRankAsStringI method returns the name of the rank of the card as a string lowercase for 
+   creating the filename of the picture for the card. 
    @return the rank value of the card as a string.
    */
    
@@ -189,14 +190,14 @@ public class Card
    
    /**
     The compareTo method Compares two cards to determine if they have the same rank.
-   * @param c the other card.
-   * @return outcome is the int that is returned. 1 if the card that calls the method is larger,
-   * -1 if the parameter card is larger and 0 if the cards are equal in rank. 
+    @param c the other card.
+    @return outcome is the int that is returned. 1 if the card that calls the method is larger,
+    -1 if the parameter card is larger and 0 if the cards are equal in rank. 
    */
    
    public int compareTo(Card c)
    {
-      int outcome = 2;   //varaible for return int value 
+      int outcome = 2;   //varaible for return int value set to 2 because that will not cause any misinformation if sent
       
       if(this.rank > c.rank)
          outcome = 1;
@@ -220,9 +221,10 @@ public class Card
       String rank = getRankAsStringI();
       String suit = getSuitAsStringI();
       
+      //add all three strings togeather to create the filename of the image of the card.
       card = rank+suit+pic;
       
-      return card;
+      return card;  //return the filename of the image 
       
      }
     

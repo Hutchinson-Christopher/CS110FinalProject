@@ -38,11 +38,11 @@ public class Pile extends ArrayList
    
    public Card topCard()
    {
-      Card top;      //variable for the top card of the pile  
+      Card top;                    //variable for the top card of the pile  
       
       top = pile.remove(0);        // remove the top card of the pile and refrence it by the variabel top 
       
-      return top;     // return top to the method that called it. 
+      return top;                  // return top to the method that called it. 
       
    }
    
@@ -73,12 +73,12 @@ public class Pile extends ArrayList
    
    public boolean isEmpty()
    {
-      boolean empty = false; 
+      boolean empty = false;     // assume pile is not empty
       
-      if(pile.size()==0)
+      if(pile.size()==0)         //if pile size is 0 then empty 
          empty = true; 
          
-      return empty; 
+      return empty;              //return boolean value 
       
     }
    

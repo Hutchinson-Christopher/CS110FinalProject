@@ -34,11 +34,12 @@ public class War
    
    public War()
    {
-      deck = new Deck();
-      deck.shuffle();
-      player1Deck = new Pile();
-      player2Deck = new Pile();
-      warPile = new Pile();
+      deck = new Deck();    //initialize deck
+      deck.shuffle();       //shuffle deck
+      
+      player1Deck = new Pile();     //initialize player one pile
+      player2Deck = new Pile();     //initialize player two pile
+      warPile = new Pile();         //initialize war pile
       
       //split the deck for player one and two. 
       for(int i = 0; i <26 ; i++)
@@ -48,9 +49,9 @@ public class War
          
       }
       
-      player1Cards = player1Deck.size();
-      player2Cards = player2Deck.size();
-      warPileCards = warPile.size();
+      player1Cards = player1Deck.size();   //set the field player1cards to the size of the cards in their deck 
+      player2Cards = player2Deck.size();   //set the field player2cards to the size of the cards in their deck 
+      warPileCards = warPile.size();       //set the field warpilecards to the size of the cards in the deck 
       
     }
     
@@ -98,7 +99,7 @@ public class War
       // if statement for if the two cards have the same rank and its a tie. 
       else if(outcome == 0)
       {
-         // call go to war method and pass the two cards used in the battle as arguments.
+         // add the two cards to the war pile inform the user this a tie and hence the gotowar method must be called 
          warPile = new Pile();
          warPile.add(player1);
          warPile.add(player2);
@@ -111,13 +112,13 @@ public class War
       player1Cards = player1Deck.size();         // set the field player1Cards to the number of cards that are in player1's deck
       player2Cards = player2Deck.size();         // set the field player2Cards to the number of cards that are in player2's deck
       warPileCards = warPile.size();             // set the field warPileCards to the number of cards that are in the warPile deck
-      System.out.println("Battle Total Deck: " + (player1Deck.size()+player2Deck.size()));
+      
       
       win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
       
-      String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win}; 
+      String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win};  //a array of strings with the important information needed for GUI to function
       
-      return info;   // return the int value outcome of the battle.
+      return info;   // return the important info for the battle 
       
     }
     
@@ -128,22 +129,22 @@ public class War
     rank which are in the war pile, plus the two cards drawn that were left face down and then the two cards the 
     battled the war.If there is another tie during a war then we go throught the same process again and add the prize
     cards to the war pile plus the two cards that were equal in rank again.returns the int value of the outcome of the war.
-    @return outcome is a int value that is 1 if the user wins, -1 if the computer wins, and 0 if the cards are 
-    equivalent in rank.
+    @return outcome is a array of strings that report the import information of the war. 
     */
     
     public String[] goToWar()
                         throws RanOutOfCards
     {
-      Card prize1;          //the top card on player1's deck that is played face down 
-      Card prize2;          //the top card on player2's deck that is played face down
-      Card player1;         //the top card of player 1's pile
-      Card player2;         //the top card of player 2's pile
-      int outcome = 2;          // the outcome of the battle 
+      Card prize1;               //the top card on player1's deck that is played face down 
+      Card prize2;               //the top card on player2's deck that is played face down
+      Card player1;              //the top card of player 1's pile
+      Card player2;              //the top card of player 2's pile
+      int outcome = 2;           // the outcome of the battle 
       String boutcome = "";      // string for winner status
       String win= " ";           //string holds value of which player won the game if ended 
       
       
+      //exception handling for if a player runs out of cards during a war 
       try
       {
          prize1 = player1Deck.topCard();          //draw top card from player 1's deck for prize 
@@ -153,15 +154,14 @@ public class War
          player1 = player1Deck.topCard();         //draw top card from player 1's deck for battle 
          player2 = player2Deck.topCard();         //draw top card from player 2's deck for battle
          
-         
+         //throw the exception if statement
          if(player1Deck.size()== 0 || player2Deck.size()==0)
             throw new RanOutOfCards();
             
             
             
          outcome = player1.compareTo(player2);     //Compare the two cards to see if player 1 wins, player 2 wins , or Tie.
-         System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
-         System.out.println("Before War: " + warPile.size());
+         
        
        
          // if statement for player 1 win 
@@ -175,8 +175,7 @@ public class War
             player1Deck.add(player1);
             player1Deck.add(player2);
             boutcome = "User Wins Battle";
-            System.out.println("User After War: " + warPile.size());
-            System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size())); 
+             
          }
          
          // if statement for player 2 win 
@@ -190,8 +189,7 @@ public class War
             player2Deck.add(player2);
             player2Deck.add(player1);
             boutcome = "Computer Wins Battle";
-            System.out.println("Computer After War: " + warPile.size());
-            System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
+            
          }
          
          // if statement for if the two cards have the same rank and its a tie. 
@@ -201,8 +199,7 @@ public class War
             warPile.add(player1);
             warPile.add(player2);
             boutcome = "Tie: Go to War";
-            System.out.println("Tied War: " + warPile.size());
-            System.out.println("Total Deck: " + (player1Deck.size()+player2Deck.size()));
+            
             
          }
         
@@ -212,12 +209,14 @@ public class War
          
          win = winner();   //call the winner method to see if a player has lost the game at the end of the battle.
          
-         String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win}; 
+         String[] info = {player1.getCardImage(), player2.getCardImage(), boutcome, win};  //a array of strings with the important information needed for GUI to function 
          
          return info;   // return the int value outcome of the battle.
        }
        catch(RanOutOfCards e)
        {
+         //if exception is thrown then error message is printed and then we call winner to who won and the nreturn this information 
+         //through a array of string objects 
          System.out.println(e.getMessage());
          win = winner();
          String[] failed = {"back.jpg","back.jpg","Player ran out of cards",win} ;
@@ -235,7 +234,7 @@ public class War
     
     public String winner() 
     {
-      String win = "not done" ;       // set variable for string name of winner of war 
+      String win = "not done" ;       // set variable for string name of winner of war, not done for if no one has won yet 
       
       // if statement that checks to see if either player is out of cards or the endGame flag has been set to true 
       if((player1Cards == 0 || player2Cards == 0) || endGame == true)
@@ -314,28 +313,20 @@ public class War
         return num;
       
      }
-       
-            
-            
-      
-
-      
-      
-    
-      
-      
-      
-      
-      
-      
      
+     /**
+     The set endGame method is a method that accepts a boolean value as a argument and use that argument to set 
+     the field endGame to it. 
+     @param g is the boolean value that is going to be used to set the endgame field. 
+     */
+     
+     public void setEndGame(boolean g)
+     {
+         endGame = g; 
          
-         
-         
-    
+     }
    
    
    
-   
-}
+ }
    
